@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entry-Level Business Admin Jobs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>Entry-Level Business &amp; Info Systems Jobs</h1>
+      <p class="subtitle">Fresh listings for Business Administration and Information Systems students</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="controls" aria-label="Filter jobs">
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Search title, company, or keyword…"
+        aria-label="Search jobs"
+      />
+      <select id="location-select" aria-label="Filter by location">
+        <option value="">All locations</option>
+      </select>
+      <select id="sort-select" aria-label="Sort by date posted">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+      </select>
+    </section>
+
+    <p id="status-line" class="status-line"></p>
+
+    <ul id="job-list" class="job-list"></ul>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Listings sourced via Adzuna. Refreshed automatically every 6 hours.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
