@@ -18,7 +18,7 @@ MAX_DAYS_OLD = int(os.environ.get("MAX_DAYS_OLD", "30"))
 RESULTS_PER_PAGE = 50
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_PATH = REPO_ROOT / "site" / "data" / "jobs.json"
+OUTPUT_PATH = REPO_ROOT / "docs" / "data" / "jobs.json"
 
 KEYWORDS = [
     "entry level",

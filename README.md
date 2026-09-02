@@ -8,14 +8,15 @@ job postings, sourced from the [Adzuna API](https://developer.adzuna.com/).
 - `scripts/fetch_jobs.py` queries Adzuna for a set of entry-level keywords, both in
   a specific metro area and nationwide-remote, excludes senior/manager-level titles,
   dedupes against the existing dataset, drops postings older than 30 days, and
-  writes the result to `site/data/jobs.json`.
+  writes the result to `docs/data/jobs.json`.
 - `.github/workflows/update-jobs.yml` runs that script on a 6-hour cron schedule and
-  commits `site/data/jobs.json` if it changed.
-- `site/` is a static frontend (no build step) that fetches `data/jobs.json` and
+  commits `docs/data/jobs.json` if it changed.
+- `docs/` is a static frontend (no build step) that fetches `data/jobs.json` and
   renders a searchable, filterable, sortable list.
 
-Note: `jobs.json` lives at `site/data/jobs.json` (not a top-level `/data` folder) so
-that it's included when GitHub Pages serves the `/site` directory.
+Note: the frontend and data both live under `docs/` (not `site/`) because GitHub
+Pages' "deploy from a branch" option only supports serving from `/ (root)` or
+`/docs` — not an arbitrary folder name.
 
 ## Local setup
 
@@ -32,7 +33,7 @@ that it's included when GitHub Pages serves the `/site` directory.
    ```
 4. Preview the site locally:
    ```bash
-   cd site
+   cd docs
    python -m http.server 8000
    ```
    Then open http://localhost:8000
@@ -46,15 +47,14 @@ that it's included when GitHub Pages serves the `/site` directory.
    - (Optional) Variable `LOCATION` — defaults to `Salt Lake City, UT` if unset
 3. Go to **Settings → Actions → General → Workflow permissions** and select
    **Read and write permissions** so the workflow can commit `jobs.json` updates.
-4. Go to **Settings → Pages** and set the source to deploy from the `/site` folder
-   on your default branch (or use a `docs/` folder / Vercel if you prefer — see notes
-   below).
+4. Go to **Settings → Pages** and set the source to **Deploy from a branch**,
+   branch `main`, folder `/docs`.
 5. Trigger the workflow once manually (Actions tab → "Update job listings" →
-   Run workflow) to populate `site/data/jobs.json` before your first deploy.
+   Run workflow) to refresh `docs/data/jobs.json` before/after your first deploy.
 
 ### Alternative: Vercel
 
-Point a Vercel project at this repo with `site` as the output/root directory; no
+Point a Vercel project at this repo with `docs` as the output/root directory; no
 build command is needed since it's static HTML/JS.
 
 ## Customizing
@@ -66,4 +66,4 @@ build command is needed since it's static HTML/JS.
   keyword.
 - **Max posting age**: `MAX_DAYS_OLD` env var (default 30).
 - **Styling**: colors are defined as CSS custom properties at the top of
-  `site/style.css` (currently University of Utah crimson/white).
+  `docs/style.css` (currently University of Utah crimson/white).
